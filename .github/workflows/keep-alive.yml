@@ -1,0 +1,16 @@
+name: Keep Alive Supabase
+
+on:
+  schedule:
+    - cron: "0 0 */3 * *"
+  workflow_dispatch:
+
+jobs:
+  ping:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Ping Supabase API
+        run: |
+          curl -X GET "https://emdbxwojbuakktybrzlv.supabase.co/rest/v1/nombre_de_tu_tabla?select=*" \
+          -H "apikey: ${{ secrets.SUPABASE_ANON_KEY_LANDING }}" \
+          -H "Authorization: Bearer ${{ secrets.SUPABASE_ANON_KEY_LANDING }}"
